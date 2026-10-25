@@ -1,38 +1,19 @@
-import cloudflare from "@astrojs/cloudflare";
-import react from "@astrojs/react";
-import { d1, r2 } from "@emdash-cms/cloudflare";
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
+// 引入cloudflare邮件插件
+import { cloudflareEmail } from "@emdash-cms/cloudflare/plugins";
 
 export default defineConfig({
-	output: "server",
-	adapter: cloudflare(),
-	image: {
-		layout: "constrained",
-		responsiveStyles: true,
-	},
-	integrations: [
-		react(),
-		emdash({
-			database: d1({ binding: "DB", session: "auto", coalesce: true }),
-			storage: r2({ binding: "MEDIA" }),
-		}),
-	],
-	fonts: [
-		{
-			provider: fontProviders.google(),
-			name: "Inter",
-			cssVariable: "--font-body",
-			weights: [400, 500, 600, 700],
-			fallbacks: ["sans-serif"],
-		},
-		{
-			provider: fontProviders.google(),
-			name: "JetBrains Mono",
-			cssVariable: "--font-mono",
-			weights: [400, 500],
-			fallbacks: ["monospace"],
-		},
-	],
-	devToolbar: { enabled: false },
+  integrations: [
+    emdash({
+      plugins: [
+        cloudflareEmail({
+          from: {
+            email: "no-reply@main.xydwyrj.cc.cd",
+            name: "小于的网游日记"
+          }
+        })
+      ],
+    }),
+  ],
 });
