@@ -1,17 +1,18 @@
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
-// 引入cloudflare邮件插件
-import { cloudflareEmail } from "@emdash-cms/cloudflare/plugins";
+import smtpPlugin from "emdash-plugin-smtp";
 
 export default defineConfig({
   integrations: [
     emdash({
       plugins: [
-        cloudflareEmail({
-          from: {
-            email: "no-reply@main.xydwyrj.cc.cd",
-            name: "小于的网游日记"
-          }
+        smtpPlugin({
+          host: "smtp.mx.cloudflare.net",
+          port: 465,
+          secure: true,
+          user: "api_token",
+          pass: "cfat_RIgcIRXuN0odREyZ94efkMJkF9u45cHbynESma9C94083222",
+          from: "no-reply@shturl.cc/txLrMLyB"
         })
       ],
     }),
