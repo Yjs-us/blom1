@@ -3,7 +3,6 @@ import react from "@astrojs/react";
 import { d1, r2 } from "@emdash-cms/cloudflare"; 
 import { defineConfig, fontProviders } from "astro/config"; 
 import emdash from "emdash/astro";
-import smtpPlugin from "emdash-plugin-smtp";
 export default defineConfig({ 
 output: "server", 
 adapter: cloudflare(), 
